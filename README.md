@@ -24,7 +24,7 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented features:
 
-![](https://i.imgur.com/hXjGMTR.mp4)
+https://i.imgur.com/hXjGMTR.mp4
 
 <!-- Replace this with whatever GIF tool you used! -->
 Recorded screen using apple native screen recorder and converted to mp4 using iMovie.
