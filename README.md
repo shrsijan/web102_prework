@@ -24,9 +24,7 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented features:
 
-<video width="500" height="500" controls>
-  <source src="https://i.imgur.com/hXjGMTR.mp4" type="video/mp4">
-</video>
+![](https://i.imgur.com/hXjGMTR.mp4)
 
 <!-- Replace this with whatever GIF tool you used! -->
 Recorded screen using apple native screen recorder and converted to mp4 using iMovie.
