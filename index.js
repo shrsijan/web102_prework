@@ -27,7 +27,15 @@ const gamesContainer = document.getElementById("games-container");
 
 // create a function that adds all data from the games array to the page
 function addGamesToPage(games) {
-
+    if(games.length == 0){
+        const divElement = document.createElement("div");
+        
+        divElement.classList.add("game-card");
+        divElement.innerHTML = "No games found for the given search keyword. Please try again!";
+        gamesContainer.appendChild(divElement);
+        
+        return;
+    }   
     // loop over each item in the data
 
         // create a new div element, which will become the game card
@@ -51,8 +59,8 @@ function addGamesToPage(games) {
             divElement.innerHTML = `
             <div>
                 <img class="game-img" src="${game.img}" alt="game image"/>
-                <div>${game.name}</div>
-                <div>${game.discription}</div>
+                <div><h2>${game.name}</h2></div>
+                <div>${game.description}</div>
             </div>`;
             gamesContainer.appendChild(divElement);
         }
@@ -190,3 +198,23 @@ firstGameContainer.appendChild(firstGameEle);
 const secondGameEle = document.createElement("p");
 secondGameEle.innerHTML = secondGame.name;
 secondGameContainer.appendChild(secondGameEle);
+
+/* my addition */
+function searchGames() {
+    const inputFieldValue = document.getElementById("search-input").value;
+
+    if(inputFieldValue == undefined || inputFieldValue == null || inputFieldValue.trim() == ""){
+        return;
+    }
+
+    deleteChildElements(gamesContainer);
+    const searchedGames = GAMES_JSON.filter((game) => {
+        return game.name.toLowerCase().indexOf(inputFieldValue.toLowerCase()) != -1}
+    );
+    
+    // use the function we previously created to add the unfunded games to the DOM
+    addGamesToPage(searchedGames);
+}
+
+const searchBtn = document.getElementById("search-btn");
+searchBtn.addEventListener("click", searchGames);
