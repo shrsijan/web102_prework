@@ -33,43 +33,35 @@ function addGamesToPage(games) {
         divElement.classList.add("game-card");
         divElement.innerHTML = "No games found for the given search keyword. Please try again!";
         gamesContainer.appendChild(divElement);
-        
+
         return;
     }   
     // loop over each item in the data
-
         // create a new div element, which will become the game card
-
-
         // add the class game-card to the list
-
-
         // set the inner HTML using a template literal to display some info 
         // about each game
         // TIP: if your images are not displaying, make sure there is space
         // between the end of the src attribute and the end of the tag ("/>")
 
-
         // append the game to the games-container
-        const game_list_len = games.length
-        for (let i = 0; i < game_list_len; i++) {
-            const game = games[i];
-            const divElement = document.createElement("div");
-            divElement.classList.add("game-card");
-            divElement.innerHTML = `
-            <div>
-                <img class="game-img" src="${game.img}" alt="game image"/>
-                <div><h2>${game.name}</h2></div>
-                <div>${game.description}</div>
-            </div>`;
-            gamesContainer.appendChild(divElement);
-        }
+    const game_list_len = games.length
+    for (let i = 0; i < game_list_len; i++) {
+        const game = games[i];
+        const divElement = document.createElement("div");
+        divElement.classList.add("game-card");
+        divElement.innerHTML = `
+        <div>
+            <img class="game-img" src="${game.img}" alt="game image"/>
+            <div><h2>${game.name}</h2></div>
+            <div>${game.description}</div>
+        </div>`;
+        gamesContainer.appendChild(divElement);
+    }
 }
 
 // call the function we just defined using the correct variable
 // later, we'll call this function using a different list of games
-addGamesToPage(GAMES_JSON);
-
 
 /*************************************************************************************
  * Challenge 4: Create the summary statistics at the top of the page displaying the
@@ -110,6 +102,12 @@ gamesCard.innerHTML = `${numberOfGames}`;
  * Skills used: functions, filter
 */
 
+function fundedGames(){
+    const fundedGameList = GAMES_JSON.filter((game) => game.pledged >= game.goal);
+    // use the function we previously created to add unfunded games to the DOM
+    addGamesToPage(fundedGameList);
+}
+
 // show only games that do not yet have enough funding
 function filterUnfundedOnly() {
     deleteChildElements(gamesContainer);
@@ -126,10 +124,7 @@ function filterFundedOnly() {
     deleteChildElements(gamesContainer);
 
     // use filter() to get a list of games that have met or exceeded their goal
-    const fundedGames = GAMES_JSON.filter((game) => game.pledged >= game.goal);
-
-    // use the function we previously created to add unfunded games to the DOM
-    addGamesToPage(fundedGames);
+    fundedGames(); // this function uses the filter to get funded games only
 }
 
 // show all games
@@ -218,3 +213,6 @@ function searchGames() {
 
 const searchBtn = document.getElementById("search-btn");
 searchBtn.addEventListener("click", searchGames);
+
+// inital game load - funded games only
+fundedGames()
